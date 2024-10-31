@@ -1,7 +1,7 @@
-// src/components/Todo.tsx
+
 
 import React, { useState } from 'react';
-import { Todo as TodoType } from '../types'; // Adjust based on your project structure
+import { Todo as TodoType } from '../types'; 
 
 interface TodoProps {
     todo: TodoType;
@@ -16,8 +16,8 @@ const Todo: React.FC<TodoProps> = ({ todo, deleteTodo, toggleEditing, editTodo }
 
     const handleEdit = () => {
         editTodo({ id: todo.id, task, priority });
-        setTask(''); // Clear input after edit
-        setPriority('low'); // Reset or set to the default
+        setTask(''); 
+        setPriority('low'); 
     };
 
     return (

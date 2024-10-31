@@ -7,14 +7,14 @@ import { addTodo, deleteTodo, updateTodo, markCompleted } from '../store/todoSli
 
 const TodoWrapper = () => {
     const [task, setTask] = useState('');
-    const [editTask, setEditTask] = useState(''); // New variable for editing task
-    const [priority, setPriority] = useState<'low' | 'medium' | 'high'>('low'); // Set default priority to low
+    const [editTask, setEditTask] = useState(''); 
+    const [priority, setPriority] = useState<'low' | 'medium' | 'high'>('low'); 
     const [editingTodoId, setEditingTodoId] = useState<string | null>(null);
     const [filteredStatus, setFilteredStatus] = useState<'all' | 'completed' | 'incomplete'>('all');
     const dispatch = useDispatch();
     const todos = useSelector((state: RootState) => state.todos.todos);
 
-    // Load todos from local storage on component mount
+   
     useEffect(() => {
         const savedTodos = localStorage.getItem('todos');
         if (savedTodos) {
@@ -24,7 +24,7 @@ const TodoWrapper = () => {
         }
     }, [dispatch]);
 
-    // Save todos to local storage whenever the todos change
+    
     useEffect(() => {
         localStorage.setItem('todos', JSON.stringify(todos));
     }, [todos]);
@@ -35,28 +35,28 @@ const TodoWrapper = () => {
             const newTodo = {
                 id: new Date().getTime().toString(),
                 task,
-                priority, // Use the priority set by the user
+                priority,
                 completed: false,
             };
             dispatch(addTodo(newTodo));
             setTask('');
-            setPriority('low'); // Reset priority to low after adding
+            setPriority('low'); 
         }
     };
 
     const handleEditTodo = (todo: any) => {
         setEditingTodoId(todo.id);
-        setEditTask(todo.task); // Set the editTask for editing
-        setPriority(todo.priority); // Set the priority for editing
+        setEditTask(todo.task); 
+        setPriority(todo.priority); 
     };
 
     const handleUpdateTodo = () => {
         if (editingTodoId) {
             const updatedTodo = {
                 id: editingTodoId,
-                task: editTask, // Use editTask for updating
-                priority, // Include the updated priority
-                completed: false, // Keep completed status unchanged on edit
+                task: editTask, 
+                priority, 
+                completed: false, 
             };
             dispatch(updateTodo(updatedTodo));
             resetEditing();
@@ -65,8 +65,8 @@ const TodoWrapper = () => {
 
     const resetEditing = () => {
         setEditingTodoId(null);
-        setEditTask(''); // Reset editTask when editing is cancelled
-        setPriority('low'); // Reset priority to low when editing is cancelled
+        setEditTask(''); 
+        setPriority('low'); 
     };
 
     const handleMarkCompleted = (id: string) => {
@@ -112,15 +112,15 @@ const TodoWrapper = () => {
                         <div>
                             <input
                                 type="text"
-                                value={editTask} // Use editTask for the input field
-                                onChange={(e) => setEditTask(e.target.value)} // Update editTask only for the editing todo
+                                value={editTask} 
+                                onChange={(e) => setEditTask(e.target.value)} 
                             />
                             <select value={priority} onChange={(e) => setPriority(e.target.value as 'low' | 'medium' | 'high')}>
                                 <option value="low">Low</option>
                                 <option value="medium">Medium</option>
                                 <option value="high">High</option>
                             </select>
-                            <button onClick={handleUpdateTodo}>Update</button> {/* Update button appears only during editing */}
+                            <button onClick={handleUpdateTodo}>Update</button> 
                         </div>
                     ) : (
                         <span className={todo.completed ? 'completed' : 'incompleted'}>
@@ -128,7 +128,7 @@ const TodoWrapper = () => {
                         </span>
                     )}
                     <button onClick={() => handleMarkCompleted(todo.id)}>Completed</button>
-                    {!editingTodoId && ( // Only show edit button if not currently editing any todo
+                    {!editingTodoId && ( 
                         <button onClick={() => handleEditTodo(todo)}>Edit</button>
                     )}
                     <button onClick={() => dispatch(deleteTodo(todo.id))}>Delete</button>

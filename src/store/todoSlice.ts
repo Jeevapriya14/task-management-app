@@ -1,4 +1,4 @@
-// src/store/todoSlice.ts
+
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
@@ -23,19 +23,19 @@ const todoSlice = createSlice({
     reducers: {
         addTodo: (state, action: PayloadAction<Todo>) => {
             state.todos.push(action.payload);
-            // Save to local storage after adding
+            
             localStorage.setItem('todos', JSON.stringify(state.todos));
         },
         deleteTodo: (state, action: PayloadAction<string>) => {
             state.todos = state.todos.filter(todo => todo.id !== action.payload);
-            // Save to local storage after deletion
+          
             localStorage.setItem('todos', JSON.stringify(state.todos));
         },
         updateTodo: (state, action: PayloadAction<Todo>) => {
             const index = state.todos.findIndex(todo => todo.id === action.payload.id);
             if (index !== -1) {
                 state.todos[index] = action.payload;
-                // Save to local storage after update
+               
                 localStorage.setItem('todos', JSON.stringify(state.todos));
             }
         },
@@ -43,7 +43,6 @@ const todoSlice = createSlice({
             const index = state.todos.findIndex(todo => todo.id === action.payload);
             if (index !== -1) {
                 state.todos[index].completed = true;
-                // Save to local storage after marking completed
                 localStorage.setItem('todos', JSON.stringify(state.todos));
             }
         },

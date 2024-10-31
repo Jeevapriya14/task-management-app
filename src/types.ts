@@ -1,4 +1,3 @@
-// src/types.ts
 
 export interface Todo {
   id: string;
@@ -10,7 +9,7 @@ export interface Todo {
 }
 
 export interface TodoProps {
-  todo: Todo; // Use the defined Todo type
+  todo: Todo; 
   deleteTodo: (id: string) => void;
   toggleEditing: (id: string) => void;
   editTodo: (payload: { id: string; task: string; priority: "low" | "medium" | "high" }) => void;

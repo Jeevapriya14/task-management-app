@@ -10,16 +10,16 @@ const TodoForm = () => {
   const handleAddTodo = (e: React.FormEvent) => {
     e.preventDefault();
     if (task.trim()) {
-      // Create a new todo object with required properties
+      
       const newTodo = {
-        id: new Date().getTime().toString(), // Generate a unique string ID
+        id: new Date().getTime().toString(), 
         task,
         priority,
-        completed: false, // Set completed to false by default
+        completed: false, 
       };
-      dispatch(addTodo(newTodo)); // Dispatch the new todo
-      setTask(''); // Clear input
-      setPriority("medium"); // Reset priority
+      dispatch(addTodo(newTodo)); 
+      setTask('');
+      setPriority("medium"); 
     }
   };
 
